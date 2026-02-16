@@ -15,24 +15,83 @@ box-sizing:border-box;
 
 body{
 height:100vh;
-background:#050505;
 display:flex;
 justify-content:center;
 align-items:center;
-overflow:hidden;
+flex-direction:column;
+background:#0b0f14;
 font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+overflow:hidden;
+color:white;
+text-align:center;
 }
 
-/* Градиентный фон */
-.bg{
+/* Неоновый круг */
+.glow{
 position:absolute;
-width:600px;
-height:600px;
-background:radial-gradient(circle,#00f2ff33,transparent 60%);
+width:400px;
+height:400px;
+background:radial-gradient(circle,#2AABEE55,transparent 70%);
+border-radius:50%;
 animation:float 6s ease-in-out infinite;
 }
 
 @keyframes float{
-0%{transform:translate(-50px,-50px);}
-50
+0%{transform:translateY(-20px);}
+50%{transform:translateY(20px);}
+100%{transform:translateY(-20px);}
+}
+
+/* Текст */
+.title{
+font-size:20px;
+letter-spacing:2px;
+margin-bottom:20px;
+z-index:2;
+animation:fadeIn 1s ease forwards;
+}
+
+/* Стрелки */
+.arrows{
+font-size:26px;
+color:#ff2d2d;
+animation:bounce 1.2s infinite;
+margin-bottom:15px;
+z-index:2;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(8px);}
+}
+
+/* Кнопка */
+.button{
+padding:20px 70px;
+font-size:20px;
+font-weight:700;
+border-radius:30px;
+border:none;
+cursor:pointer;
+background:#2AABEE;
+color:white;
+box-shadow:0 0 30px #2AABEE88;
+transition:all 0.3s ease;
+z-index:2;
+}
+
+.button:hover{
+transform:scale(1.05);
+box-shadow:0 0 50px #2AABEE;
+}
+
+.button:active{
+transform:scale(0.95);
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(15px);}
+to{opacity:1; transform:translateY(0);}
+}
+</st
   
