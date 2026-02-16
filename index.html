@@ -7,121 +7,100 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-  overflow:hidden;
-  position:relative;
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+height:100vh;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+font-family:Arial, sans-serif;
+color:white;
 }
 
-/* Плавающий glow фон */
-body::before {
-  content:"";
-  position:absolute;
-  width:400px;
-  height:400px;
-  background:radial-gradient(circle,rgba(42,171,238,0.6),transparent);
-  border-radius:50%;
-  animation:float 6s ease-in-out infinite;
+/* Дым фон */
+body::before{
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+background:radial-gradient(circle at center,#111 0%,#000 60%);
+animation:smoke 6s infinite alternate ease-in-out;
+}
+@keyframes smoke{
+0%{transform:scale(1);}
+100%{transform:scale(1.1);}
 }
 
-@keyframes float {
-  0% { transform:translate(-150px,-150px); }
-  50% { transform:translate(150px,150px); }
-  100% { transform:translate(-150px,-150px); }
+/* Смерть */
+.reaper{
+position:absolute;
+left:-300px;
+bottom:0;
+font-size:200px;
+filter:drop-shadow(0 0 30px #00f2ff);
+animation:enter 2s ease forwards;
+}
+@keyframes enter{
+to{left:10%;}
 }
 
-/* Стрелки */
-.arrows {
-  font-size:28px;
-  color:#2AABEE;
-  animation: bounce 1.5s infinite;
-  margin-bottom:15px;
-  letter-spacing:8px;
+/* Удар */
+.slash{
+position:absolute;
+width:0;
+height:0;
+border-top:3px solid #00f2ff;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) rotate(-25deg);
+opacity:0;
 }
 
-@keyframes bounce {
-  0%,100% { transform:translateY(0); opacity:0.6; }
-  50% { transform:translateY(10px); opacity:1; }
+@keyframes strike{
+0%{width:0;opacity:1;}
+50%{width:600px;}
+100%{width:0;opacity:0;}
+}
+
+/* Вспышка */
+.flash{
+position:absolute;
+width:0;
+height:0;
+background:radial-gradient(circle,#00f2ff 0%,transparent 70%);
+border-radius:50%;
+opacity:0;
+}
+@keyframes boom{
+0%{width:0;height:0;opacity:1;}
+100%{width:500px;height:500px;opacity:0;}
 }
 
 /* Кнопка */
-.button {
-  position:relative;
-  padding:20px 60px;
-  font-size:20px;
-  font-weight:700;
-  color:white;
-  border:none;
-  border-radius:18px;
-  cursor:pointer;
-  backdrop-filter:blur(12px);
-  background:rgba(255,255,255,0.08);
-  box-shadow:0 0 20px rgba(42,171,238,0.6);
-  transition:all 0.3s ease;
-  animation:fadeIn 1s ease forwards;
-  opacity:0;
+.button{
+position:absolute;
+padding:22px 70px;
+font-size:22px;
+font-weight:800;
+border:none;
+border-radius:20px;
+cursor:pointer;
+background:rgba(0,0,0,0.4);
+color:#00f2ff;
+backdrop-filter:blur(12px);
+box-shadow:0 0 25px #00f2ff;
+opacity:0;
+transform:scale(0.5);
+transition:all 0.6s ease;
 }
 
-/* Появление */
-@keyframes fadeIn {
-  to { opacity:1; transform:translateY(0); }
+.button.show{
+opacity:1;
+transform:scale(1);
 }
 
-/* Пульс */
-.button::before {
-  content:"";
-  position:absolute;
-  inset:-8px;
-  border-radius:22px;
-  background:linear-gradient(45deg,#2AABEE,#00f2ff);
-  z-index:-1;
-  filter:blur(15px);
-  animation:pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity:0.6; }
-  50% { opacity:1; }
-  100% { opacity:0.6; }
-}
-
-.button:hover {
-  transform:translateY(-6px);
-  box-shadow:0 0 35px rgba(42,171,238,1);
-}
-
-.button:active {
-  transform:scale(0.95);
-}
-</style>
-</head>
-
-<body>
-
-<div class="arrows">⬇ ⬇ ⬇</div>
-
-<button class="button" id="openBtn">
-  🚀 ОТКРЫТЬ КАНАЛ
-</button>
-
-<script>
-const tg = window.Telegram.WebApp;
-tg.ready();
-tg.expand();
-
-document.getElementById("openBtn").onclick = function() {
-    tg.HapticFeedback.impactOccurred("heavy");
-    tg.openLink("https://t.me/huwu774");
-};
-</script>
-
-</body>
-</html>
+.button:hover{
+box-shadow:0 0 60px #00f2ff;
+transform:
